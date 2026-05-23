@@ -4,10 +4,10 @@
 
 Never forget to like a video again.
 
-![](https://img.shields.io/github/downloads/austencm/youtube-auto-like/total?style=flat)
-![](https://img.shields.io/github/downloads/austencm/youtube-auto-like/latest/total?style=flat)
-![](https://img.shields.io/github/v/release/austencm/youtube-auto-like)
-![](https://img.shields.io/github/release-date/austencm/youtube-auto-like)
+![](https://img.shields.io/github/downloads/sq-sw/youtube-auto-like-updated/total?style=flat)
+![](https://img.shields.io/github/downloads/sq-sw/youtube-auto-like-updated/latest/total?style=flat)
+![](https://img.shields.io/github/v/release/sq-sw/youtube-auto-like-updated)
+![](https://img.shields.io/github/release-date/sq-sw/youtube-auto-like-updated)
 
 Tested with Chrome, but it should work with any Chromium-based browser. [Firefox version here](https://addons.mozilla.org/en-US/firefox/addon/youtube_auto_like/).
 
@@ -15,7 +15,7 @@ Tested with Chrome, but it should work with any Chromium-based browser. [Firefox
 
 > **Git users:** You can clone the repo and skip to step 3. Load the `/dist` directory and pull to update.
 
-1. Download the latest release: https://github.com/austencm/youtube-auto-like/releases/latest/download/release.zip
+1. Download the latest release: https://github.com/sq-sw/youtube-auto-like-updated/releases/latest/download/release.zip
 1. Unzip `release.zip` somewhere safe
 1. Open your extensions page in Chrome (in the top right, click the <img width="18" height="18" src="https://lh3.googleusercontent.com/5nlvcUtFevZLAkSJALBl5Fa8thP_-mGFnUngJLuAFzt0jws-Lr09I9mIfawW4vKiT6k=w36-h36" alt="puzzle piece"> icon, then "Manage Extensions" (at the bottom of the popup)
 1. Turn on Developer Mode (in the top right)
@@ -27,7 +27,7 @@ Tested with Chrome, but it should work with any Chromium-based browser. [Firefox
 
 Keep an eye out for a badge on the extension icon when an update is available.
 
-1. Click the icon for a download link, or download the latest release [here](https://github.com/austencm/youtube-auto-like/releases/latest/download/release.zip)
+1. Click the icon for a download link, or download the latest release [here](https://github.com/sq-sw/youtube-auto-like-updated/releases/latest/download/release.zip)
 1. Unzip `release.zip` and replace your current extension files with the latest
 1. Go to your extensions page, find YouTube Auto Like, and click the refresh icon (restarting Chrome also works)
 
@@ -35,7 +35,7 @@ Keep an eye out for a badge on the extension icon when an update is available.
 
 ## Translations
 
-Feel free to contribute with a [pull request](https://github.com/austencm/youtube-auto-like/pulls) or grab [the JSON file](https://raw.githubusercontent.com/austencm/youtube-auto-like/master/app/_locales/en/messages.json), translate it, and [send it back to me](mailto:heyausten@gmail.com).
+Feel free to contribute with a [pull request](https://github.com/sq-sw/youtube-auto-like-updated/pulls) or grab [the JSON file](https://raw.githubusercontent.com/sq-sw/youtube-auto-like-updated/master/src/_locales/en/messages.json), translate it, and [send it back to me](mailto:heyausten@gmail.com).
 
 ## Acknowledgments
 

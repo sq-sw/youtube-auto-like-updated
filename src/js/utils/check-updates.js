@@ -1,6 +1,6 @@
 async function checkForUpdates() {
   const version = chrome.runtime.getManifest().version;
-  const response = await fetch('https://api.github.com/repos/austencm/youtube-auto-like/releases/latest');
+  const response = await fetch('https://api.github.com/repos/sq-sw/youtube-auto-like-updated/releases/latest');
   const lastestRelease = await response.json();
   const latestVersion = lastestRelease.tag_name.replace('v', '');
 

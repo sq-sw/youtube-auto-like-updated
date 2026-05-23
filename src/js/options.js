@@ -39,7 +39,7 @@ const loadOptions = async () => {
   chrome.storage.local.get({ log: '[no log found]' }, ({ log }) => {
     // Add options state to report issue link
     const reportLink = document.querySelector('#report-link');
-    const url = `https://github.com/austencm/youtube-auto-like/issues/new?labels=bug&body=${encodeURIComponent(
+    const url = `https://github.com/sq-sw/youtube-auto-like-updated/issues/new?labels=bug&body=${encodeURIComponent(
       bugReportTemplate + log
     )}`;
     reportLink.setAttribute('href', url);
