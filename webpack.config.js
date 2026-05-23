@@ -1,8 +1,14 @@
 const path = require('path');
-const RunChromeExtension = require('webpack-run-chrome-extension');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ZipWebpackPlugin = require('zip-webpack-plugin');
+
+let RunChromeExtension;
+try {
+  RunChromeExtension = require('webpack-run-chrome-extension');
+} catch (e) {
+  // webpack-run-chrome-extension is optional (only for dev mode)
+}
 
 const IS_PROD = process.env.NODE_ENV === 'production';
 const paths = {
@@ -32,7 +38,7 @@ module.exports = {
     new CopyWebpackPlugin({
       patterns: [
         `${paths.src}/manifest.json`,
-        { from: `${paths.src}/*.html`, context: paths.src },
+        { from: '*.html', context: paths.src },
         { from: `${paths.src}/_locales`, to: `${paths.build}/_locales` },
         { from: `${paths.src}/css`, to: `${paths.build}/css` },
         { from: `${paths.src}/images`, to: `${paths.build}/images` },
@@ -54,6 +60,9 @@ module.exports = {
   // Determine how modules within the project are treated
   module: {
     rules: [
+      // JavaScript: Transpile ES modules
+      { test: /\.js$/, exclude: /node_modules/, use: { loader: 'babel-loader', options: { presets: [['@babel/preset-env', { modules: 'commonjs' }]] } } },
+
       // Images: Copy image files to build folder
       { test: /\.(?:ico|gif|png|jpg|jpeg)$/i, type: 'asset/resource' },
 

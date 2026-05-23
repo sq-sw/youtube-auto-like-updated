@@ -24,7 +24,7 @@ export default class Debug {
 
   save() {
   	return new Promise((resolve) => {
-      chrome.storage.sync.set({ log: this.messages.join('\n') }, resolve);
+      chrome.storage.local.set({ log: this.messages.join('\n') }, resolve);
     });
   }
 }

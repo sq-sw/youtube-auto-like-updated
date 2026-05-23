@@ -7,9 +7,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/austencm/youtube-auto-like.git"
+    "url": "git+https://github.com/austencm/youtube-auto-like.git"
   },
-  "bugs": "https://github.com/austencm/youtube-auto-like/issues",
+  "bugs": {
+    "url": "https://github.com/austencm/youtube-auto-like/issues"
+  },
   "keywords": [
     "addon",
     "auto",
@@ -24,13 +26,34 @@
     "video"
   ],
   "contributors": [
-    "Taknok (https://github.com/Taknok)",
-    "JKetelaar (https://github.com/JKetelaar)",
-    "Szmyk (https://github.com/Szmyk)",
-    "moweME (https://github.com/moweME)",
-    "mariovalney (https://github.com/mariovalney)",
-    "Borian23 (https://github.com/Borian23)",
-    "UtkuGARIP (https://github.com/UtkuGARIP)"
+    {
+      "name": "Taknok",
+      "url": "https://github.com/Taknok"
+    },
+    {
+      "name": "JKetelaar",
+      "url": "https://github.com/JKetelaar"
+    },
+    {
+      "name": "Szmyk",
+      "url": "https://github.com/Szmyk"
+    },
+    {
+      "name": "moweME",
+      "url": "https://github.com/moweME"
+    },
+    {
+      "name": "mariovalney",
+      "url": "https://github.com/mariovalney"
+    },
+    {
+      "name": "Borian23",
+      "url": "https://github.com/Borian23"
+    },
+    {
+      "name": "UtkuGARIP",
+      "url": "https://github.com/UtkuGARIP"
+    }
   ],
   "scripts": {
     "postinstall": "npm run build",
@@ -38,10 +61,15 @@
     "build": "NODE_ENV=production webpack"
   },
   "devDependencies": {
+    "@babel/core": "^7.29.0",
+    "@babel/preset-env": "^7.29.5",
+    "babel-loader": "^10.1.1",
     "clean-webpack-plugin": "*",
     "copy-webpack-plugin": "^7.0.0",
     "webpack": "^5.76.0",
-    "webpack-run-chrome-extension": "^0.6.0",
+    "webpack-cli": "^7.0.2",
     "zip-webpack-plugin": "^4.0.1"
-  }
+  },
+  "main": "webpack.config.js",
+  "type": "commonjs"
 }

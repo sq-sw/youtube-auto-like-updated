@@ -1,11 +1,13 @@
 const selectors = {
   likeButton: [
+    '#top-level-buttons-computed segmented-like-dislike-button-view-model like-button-view-model button',
     '#top-level-buttons-computed > ytd-toggle-button-renderer:nth-child(1) yt-icon-button',
     '#top-level-buttons-computed > ytd-toggle-button-renderer:nth-child(1) button',
     '#segmented-like-button button',
     'like-button-view-model button',
   ],
   dislikeButton: [
+    '#top-level-buttons-computed segmented-like-dislike-button-view-model dislike-button-view-model button',
     '#top-level-buttons-computed > ytd-toggle-button-renderer:nth-child(2) yt-icon-button',
     '#top-level-buttons-computed > ytd-toggle-button-renderer:nth-child(2) button',
     '#segmented-dislike-button button',
@@ -74,19 +76,24 @@ export default class Liker {
     this.log('waiting for buttons...');
 
     return new Promise((resolve) => {
+      const timeout = setTimeout(() => {
+        clearInterval(interval);
+        this.log('...buttons timeout, using like button if found');
+        resolve();
+      }, 15000);
       const interval = setInterval(() => {
         const likeButton = document.querySelectorAll(selectors.likeButton)[0];
-        const dislikeButton = document.querySelectorAll(
-          selectors.dislikeButton
-        )[0];
-        // Make sure both buttons exist
-        if (likeButton && dislikeButton) {
-          // Store buttons
+        if (likeButton) {
           this.cache.likeButton = likeButton;
-          this.cache.dislikeButton = dislikeButton;
-
+          const dislikeButton = document.querySelectorAll(
+            selectors.dislikeButton
+          )[0];
+          if (dislikeButton) {
+            this.cache.dislikeButton = dislikeButton;
+          }
           this.log('...buttons ready');
           clearInterval(interval);
+          clearTimeout(timeout);
           resolve();
         }
       }, 1000);
@@ -100,12 +107,17 @@ export default class Liker {
     this.log('waiting for video...');
 
     return new Promise((resolve) => {
+      const timeout = setTimeout(() => {
+        clearInterval(interval);
+        this.log('...video timeout');
+        resolve();
+      }, 15000);
       const interval = setInterval(() => {
         this.cache.video = document.querySelector('.video-stream');
-        // Does the video exist?
         if (this.cache.video) {
           this.log('...video ready');
           clearInterval(interval);
+          clearTimeout(timeout);
           resolve();
         }
       }, 1000);
@@ -117,11 +129,9 @@ export default class Liker {
    */
   isVideoRated() {
     return (
-      (this.cache.likeButton.classList.contains('style-default-active') &&
-        !this.cache.likeButton.classList.contains('size-default')) ||
-      this.cache.dislikeButton.classList.contains('style-default-active') ||
       this.cache.likeButton.getAttribute('aria-pressed') === 'true' ||
-      this.cache.dislikeButton.getAttribute('aria-pressed') === 'true'
+      (this.cache.dislikeButton &&
+        this.cache.dislikeButton.getAttribute('aria-pressed') === 'true')
     );
   }
 
@@ -131,7 +141,7 @@ export default class Liker {
    */
   isUserSubscribed() {
     // Select the sub button
-    const subscribeButton =
+    let subscribeButton =
       this.cache.subscribeButton ||
       document.querySelectorAll(selectors.subscribeButton)[0];
 
@@ -141,12 +151,23 @@ export default class Liker {
       return false;
     }
 
+    // Check the parent ytd-subscribe-button-renderer for subscribed attribute
+    const parentRenderer = subscribeButton.closest
+      ? subscribeButton.closest('ytd-subscribe-button-renderer')
+      : null;
+
+    if (parentRenderer && parentRenderer.hasAttribute('subscribed')) {
+      this.log('user is subscribed (via parent attribute)');
+      return true;
+    }
+
     this.cache.subscribeButton = subscribeButton;
 
     // Is the button active?
     if (
       subscribeButton.hasAttribute('subscribed') ||
-      subscribeButton.classList.contains('yt-spec-button-shape-next--tonal')
+      subscribeButton.classList.contains('yt-spec-button-shape-next--tonal') ||
+      subscribeButton.classList.contains('ytSpecButtonShapeNextTonal')
     ) {
       return true;
     }
@@ -169,14 +190,12 @@ export default class Liker {
   }
 
   isAdPlaying() {
-    return (
-      this.cache.video &&
-      ['ad-showing', 'ad-interrupting'].every((c) => {
-        return this.cache.video
-          .closest('.html5-video-player')
-          .classList.contains(c);
-      })
-    );
+    if (!this.cache.video) return false;
+    const player = this.cache.video.closest('.html5-video-player');
+    if (!player) return false;
+    return ['ad-showing', 'ad-interrupting'].every((c) => {
+      return player.classList.contains(c);
+    });
   }
 
   /**

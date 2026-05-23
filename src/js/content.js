@@ -43,6 +43,17 @@ const debug = new Debug();
 
     const liker = new Liker({ options, log: debug.log });
     liker.onPause = debug.save;
+
+    // Also listen for yt-navigate-finish (newer YouTube navigation event)
+    const appRoot = document.querySelector('ytd-app');
+    if (appRoot) {
+      appRoot.addEventListener('yt-navigate-finish', () => {
+        debug.log('navigate-finish');
+        if (liker.status === 'idle') {
+          liker.start();
+        }
+      });
+    }
   } catch (err) {
     debug.log(err);
   } finally {

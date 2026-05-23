@@ -36,7 +36,7 @@ const loadOptions = async () => {
     }
   });
 
-  chrome.storage.sync.get({ log: '[no log found]' }, ({ log }) => {
+  chrome.storage.local.get({ log: '[no log found]' }, ({ log }) => {
     // Add options state to report issue link
     const reportLink = document.querySelector('#report-link');
     const url = `https://github.com/austencm/youtube-auto-like/issues/new?labels=bug&body=${encodeURIComponent(
