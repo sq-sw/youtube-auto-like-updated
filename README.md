@@ -1,4 +1,4 @@
-<img width="100" height="100" src="https://i.imgur.com/CwAIwN6.png" align="right" />
+<img width="64" height="64" src="https://i.imgur.com/CwAIwN6.png" align="right" />
 
 # YouTube Auto Like
 
