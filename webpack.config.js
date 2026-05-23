@@ -42,12 +42,14 @@ module.exports = {
         { from: `${paths.src}/_locales`, to: `${paths.build}/_locales` },
         { from: `${paths.src}/css`, to: `${paths.build}/css` },
         { from: `${paths.src}/images`, to: `${paths.build}/images` },
+        { from: '../LICENSE', context: paths.src },
       ],
     }),
     IS_PROD &&
       new ZipWebpackPlugin({
         path: '../',
         filename: 'release.zip',
+        exclude: [/\.LICENSE\.txt$/],
       }),
     !IS_PROD &&
       new RunChromeExtension({
